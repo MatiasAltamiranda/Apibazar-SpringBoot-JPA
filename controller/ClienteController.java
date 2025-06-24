@@ -29,6 +29,15 @@ public class ClienteController {
         }
     }
 
+    @GetMapping("/clientes/{id_cliente}")
+    public ResponseEntity<Cliente> getCliente(@PathVariable Long id_cliente) {
+       Cliente cliente = clienteServ.findCliente(id_cliente);
+
+        if (cliente != null) return ResponseEntity.ok(cliente);
+
+        return null;
+    }
+
 
     @PostMapping("/clientes/crear")
     public ResponseEntity<Map<String, Object>> createCliente(@RequestBody Cliente cliente) {
@@ -60,7 +69,6 @@ public class ClienteController {
         Map<String, Object> response = new HashMap<>();
         response.put("ok", true);
         response.put("message", "Cliente actualizado correctamente");
-
         return ResponseEntity.ok(response);
     }
 
